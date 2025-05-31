@@ -6,7 +6,7 @@ on:
   pull_request:
     branches: [ main, master ]
   schedule:
-    - cron: '*/5 * * * *' 
+    - cron: '*/5 * * * *'   # Every 5 minutes
   workflow_dispatch:        # Allow manual trigger
 
 jobs:
@@ -36,4 +36,19 @@ jobs:
       with:
         name: playwright-report
         path: playwright-report/
+        retention-days: 30
+
+    - name: Install Allure CLI
+      run: npm install -g allure-commandline --save-dev
+
+    - name: Generate Allure Report
+      run: |
+        allure generate ./allure-results --clean -o ./allure-report
+
+    - name: Upload Allure Report
+      if: ${{ !cancelled() }}
+      uses: actions/upload-artifact@v4
+      with:
+        name: allure-report
+        path: allure-report/
         retention-days: 30
