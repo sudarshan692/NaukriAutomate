@@ -24,7 +24,7 @@ jobs:
       run: npx playwright install chromium
 
     - name: Run Playwright tests
-      run: npx playwright test
+      run: xvfb-run --auto-servernum -- npx playwright test
 
     - name: Upload Playwright HTML Report
       if: ${{ !cancelled() }}
