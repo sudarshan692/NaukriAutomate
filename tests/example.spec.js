@@ -14,6 +14,9 @@ test("test1", async ({page}) => {
   await page.getByPlaceholder('Enter Email ID / Username').fill(name);
   await page.getByPlaceholder('Enter Password').fill(unit);
   await page.getByRole('button', { name: 'Login', exact: true }).click();
+  const title =  await page.locator("div[title='Sudarshan K Patil']").textContent();
+  console.log("Title is: " + title);
+  expect(title?.trim()).toBe('Sudarshan K Patil');
 });
 
 // test.describe("Update Res", () => {
