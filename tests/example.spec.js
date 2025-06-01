@@ -5,19 +5,21 @@ const filePath = "./tests/Sudarshan_Patil_Resume.pdf";
 const name = process.env.NAME;
 const unit = process.env.UNIT;
 
-test("test1", async ({ page }) => {
+test.use({ storageState: 'auth.json' });
+
+test("test1", async ({ page, context }) => {
   await test.step("Navigate to Naukri login page", async () => {
-    await page.goto('https://www.naukri.com/nlogin/login?URL=http://www.naukri.com/mnjuser/recommendedjobs');
+  await page.goto('https://www.naukri.com/nlogin/login?URL=http://www.naukri.com/mnjuser/recommendedjobs');
   });
 
-  await test.step("Fill in login credentials", async () => {
-    await page.getByPlaceholder('Enter Email ID / Username').fill(name);
-    await page.getByPlaceholder('Enter Password').fill(unit);
-  });
+  // await test.step("Fill in login credentials", async () => {
+  //   await page.getByPlaceholder('Enter Email ID / Username').fill(name);
+  //   await page.getByPlaceholder('Enter Password').fill(unit);
+  // });
 
-  await test.step("Click Login button", async () => {
-    await page.getByRole('button', { name: 'Login', exact: true }).click();
-  });
+  // await test.step("Click Login button", async () => {
+  //   await page.getByRole('button', { name: 'Login', exact: true }).click();
+  // });
 
   await test.step("Navigate to home page", async () => {
     await page.getByRole('link', { name: 'Naukri Logo' }).first().click();
@@ -73,4 +75,5 @@ test("test1", async ({ page }) => {
     await page.getByPlaceholder('Minimum 5 words. Sample').fill('Serving Notice Period | SDET@Cognizant | Playwright | Javascript | API testing | Rest Assured | Selenium | Java | Axios | Mocha | TestNg | Postman | SQL | SoapUI | Performance testing | Python | GitHub actions | CI/CD GitLab | ReactJS | Agile | Jira');
     await page.getByRole('button', { name: 'Save' }).click();
   });
+  await context.storageState({ path: 'auth.json' });
 });
