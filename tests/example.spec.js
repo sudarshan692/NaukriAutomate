@@ -1,7 +1,7 @@
 const { test, expect } = require("@playwright/test");
 require("dotenv").config();
 const filePath = "./tests/Sudarshan_Patil_Resume.pdf";
-const videoRecordedPath = process.env.VIDEO_RECORD_PATH;
+// const videoRecordedPath = process.env.VIDEO_RECORD_PATH;
 let context;
 let page;
 
@@ -11,12 +11,7 @@ const unit = process.env.UNIT;
 
 test.describe("Update Res", () => {
   test.beforeAll(async ({ browser }) => {
-    context = await browser.newContext({
-      recordVideo: {
-        dir: videoRecordedPath,
-        size: { width: 1920, height: 1080 },
-      },
-    });
+    context = await browser.newContext({});
     page = await context.newPage();
     await page.setViewportSize({ width: 1920, height: 1080 });
   });
