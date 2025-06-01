@@ -10,11 +10,17 @@ const name = process.env.NAME;
 const unit = process.env.UNIT;
 
 test("test1", async ({page}) => {
+  console.log("Navigating to login page...");
   await page.goto('https://www.naukri.com/nlogin/login?URL=http://www.naukri.com/mnjuser/recommendedjobs');
+  console.log("Filling username...");
   await page.getByPlaceholder('Enter Email ID / Username').fill(name);
+  console.log("Filling password...");
   await page.getByPlaceholder('Enter Password').fill(unit);
+  console.log("Clicking login...");
   await page.getByRole('button', { name: 'Login', exact: true }).click();
+   console.log("landing dashboard...");
   await page.getByRole('link', { name: 'Naukri Logo' }).first().click();
+   console.log("getting text...");
   await page.waitForTimeout(20000);
   const title =  await page.locator("div[title='Sudarshan K Patil']").textContent();
   console.log("Title is: " + title);
