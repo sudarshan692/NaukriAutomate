@@ -15,6 +15,7 @@ test("test1", async ({page}) => {
   await page.getByPlaceholder('Enter Password').fill(unit);
   await page.getByRole('button', { name: 'Login', exact: true }).click();
   await page.getByRole('link', { name: 'Naukri Logo' }).first().click();
+  await page.waitForTimeout(20000);
   const title =  await page.locator("div[title='Sudarshan K Patil']").textContent();
   console.log("Title is: " + title);
   expect(title?.trim()).toBe('Sudarshan K Patil');
